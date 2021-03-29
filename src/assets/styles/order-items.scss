@@ -1,0 +1,80 @@
+.card {
+  margin-bottom: 25px;
+  border-radius: 5px;
+}
+
+.card:hover {
+  box-shadow: 0 3rem 3rem -1.25rem rgba(10, 10, 10, 0.1);
+  // transform: translateY(-0.5rem);
+}
+
+.card-header {
+  padding: 20px;
+
+  .car-title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+}
+
+.column-title {
+  text-align: center;
+  font-size: 18px;
+  border-bottom: 2px solid #f1f2f3;
+  padding-bottom: 15px;
+  margin: auto;
+  font-weight: bold;
+}
+
+.column-items {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 30px;
+}
+
+.edit-buttons {
+  margin-top: 20px;
+}
+
+.packages-list {
+  &__title {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .one-package {
+    border: 1px solid #cddc39;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    margin-bottom: 15px;
+    border-radius: 5px;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
+
+    &__title {
+      background: #f5f7fa;
+      padding: 8px;
+      font-weight: bold;
+    }
+
+    &__content {
+      padding: 10px;
+    }
+  }
+
+  .one-package_base-inspection {
+    border: 2px solid #9c27b0;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.scopes-history-link {
+  text-align: center;
+  display: block;
+  margin-top: 5px;
+}

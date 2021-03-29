@@ -1,32 +1,36 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <component :is="layout" />
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import EmptyLayout from './layouts/EmptyLayout';
+import MainLayout from './layouts/MainLayout';
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  computed: {
+    layout() {
+      return (this.$route.meta.layout || 'empty') + '-layout';
     }
+  },
+  components: {
+    MainLayout,
+    EmptyLayout
+  },
+  created: function() {},
+  mounted() {
+    if (localStorage.token == null) {
+      this.$router.push('/login');
+    }
+
+    this.$store.dispatch('getAllEmployees');
   }
-}
+};
+</script>
+
+<style lang="scss">
+@import '~buefy/dist/buefy.css';
+@import 'assets/index.scss';
+@import '~@mdi/font/css/materialdesignicons.min.css';
 </style>

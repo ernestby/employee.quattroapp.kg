@@ -1,27 +1,52 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+// import store from "@/store";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/Login.vue'),
+    meta: { title: 'Авторизация', layout: 'empty', auth: false }
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/',
+    name: 'Main',
+    component: () => import('../views/Employees.vue'),
+    meta: { title: 'Сотрудники', layout: 'main', auth: true }
+  },
+  {
+    path: '*',
+    name: 'Error',
+    component: () => import('../views/Error404.vue'),
+    meta: { title: 'Ошибка', layout: 'empty', auth: true }
   }
-]
+];
 
 const router = new VueRouter({
-  routes
-})
+  mode: 'history',
+  routes,
+  base: process.env.BASE_URL,
+  linkActiveClass: 'active'
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+  const requireAuth = to.matched.some(record => record.meta.auth);
+
+  if (requireAuth && !localStorage.token) {
+    next('/login');
+  } else {
+    next();
+  }
+});
+
+const DEFAULT_TITLE = 'Quattro Office';
+router.afterEach((to, from) => {
+  Vue.nextTick(() => {
+    document.title = to.meta.title + ' :: ' + DEFAULT_TITLE || DEFAULT_TITLE;
+  });
+});
+
+export default router;
