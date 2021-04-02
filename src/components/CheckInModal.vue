@@ -31,7 +31,7 @@
               'Введите пароль': $v.password.$dirty && !$v.password.required
             }"
           >
-            <b-input v-model="password"></b-input>
+            <b-input type="password" v-model="password"></b-input>
           </b-field>
           <b-button
             native-type="submit"
@@ -83,21 +83,12 @@ export default {
         .then(response => {
           this.$message(response.data);
           this.btnLoading = false;
+          this.password = '';
         })
         .catch(e => {
           this.$error(e.response.data);
           this.btnLoading = false;
         });
-
-      // console.log(result);
-      // if (result.status === false) {
-      //   this.setError(result.message);
-      // } else {
-      //   this.setMessage('Успешная авторизация');
-      //   this.password = '';
-      // }
-
-      //
     }
   },
   computed: {

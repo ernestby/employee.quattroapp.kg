@@ -20,8 +20,8 @@
               <img
                 :src="
                   best.image
-                    ? 'http://new.quattro.kg/uploads/' + best.image
-                    : 'https://quattro.kg/uploads/turat.jpg'
+                    ? 'http://quattroapp.ru/uploads/' + best.image
+                    : 'https://quattroapp.ru/uploads/turat.jpg'
                 "
                 class="member-avatar"
               />
