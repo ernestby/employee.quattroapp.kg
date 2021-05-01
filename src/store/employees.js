@@ -48,6 +48,13 @@ export default {
         });
       });
     },
+    getBadCurrentMonth(context) {
+      return new Promise(resolve => {
+        employeesApi.getBadCurrentMonth().then(response => {
+          resolve(response.data);
+        });
+      });
+    },
     getAllEmployees(context) {
       return new Promise(resolve => {
         employeesApi.getAllEmployees().then(response => {

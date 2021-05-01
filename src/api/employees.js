@@ -12,6 +12,11 @@ const getBestCurrentMonth = () => {
   return axios.get(`/employees/month-best/`);
 };
 
+const getBadCurrentMonth = () => {
+  return axios.get(`/employees/month-bad/`);
+};
+
+
 const getAllEmployees = () => {
   return axios.get(`/employees/`);
 };
@@ -19,6 +24,7 @@ const getAllEmployees = () => {
 export default {
   getEmployeesByGroup,
   getBestCurrentMonth,
+  getBadCurrentMonth,
   getAllEmployees,
   employeeAuth
 };

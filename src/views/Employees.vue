@@ -35,6 +35,32 @@
           </div>
           <div v-else>Сотрудники еще не определены.</div>
         </div>
+                <div class="box employees-best">
+          <div class="box-title">Худшие сотрудники прошлого месяца</div>
+          <div style="display: flex;" v-if="badMonthEmployees.length > 0">
+            <div
+              v-for="(bad, key) in badMonthEmployees"
+              :key="key"
+              style="margin-right: 20px;"
+            >
+              <img
+                :src="
+                  bad.image
+                    ? 'http://quattroapp.ru/uploads/' + bad.image
+                    : 'https://quattroapp.ru/uploads/turat.jpg'
+                "
+                class="member-avatar"
+              />
+              <div class="text-center">
+                <strong>{{ bad.fullname }}</strong>
+              </div>
+              <div class="text-center">
+                {{ bad.group_title }}
+              </div>
+            </div>
+          </div>
+          <div v-else>Сотрудники еще не определены.</div>
+        </div>
         <employees :title="'Рейтинг администраторов'" :items="adminEmployees" />
         <employees :title="'Рейтинг мастеров'" :items="masterEmployees" />
       </div>
@@ -91,12 +117,14 @@ export default {
     const masterEmployees = [];
     const scoreActions = [];
     const bestMonthEmployees = [];
+    const badMonthEmployees = [];
 
     return {
       searchKeyword: '',
       adminEmployees,
       masterEmployees,
       bestMonthEmployees,
+      badMonthEmployees,
       scoreActions,
       scoreTableElements: 50,
       hasMobileCards: true
@@ -123,6 +151,10 @@ export default {
 
     this.$store.dispatch('getBestCurrentMonth').then(response => {
       this.bestMonthEmployees = response;
+    });
+
+    this.$store.dispatch('getBadCurrentMonth').then(response => {
+      this.badMonthEmployees = response;
     });
   }
 };
